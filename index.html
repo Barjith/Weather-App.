@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="WeatherNow — Real-time weather dashboard using OpenWeatherMap API." />
+  <title>WeatherNow — Real-time Weather Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="app">
+
+    <header class="app-header">
+      <div class="brand">
+        <span aria-hidden="true">🌤️</span>
+        <h1>WeatherNow</h1>
+      </div>
+      <button class="icon-btn" id="themeBtn" aria-label="Toggle light/dark mode">🌙</button>
+    </header>
+
+    <!-- Search -->
+    <form class="search-form" id="searchForm" aria-label="Search weather by city">
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input
+          type="search" id="cityInput"
+          placeholder="Search city... (e.g. London, Tokyo, Chennai)"
+          aria-label="City name" autocomplete="off"
+          required
+        />
+        <button type="submit" class="btn-primary" aria-label="Get weather">Search</button>
+      </div>
+      <div class="quick-cities" role="group" aria-label="Quick city search">
+        <span class="quick-label">Quick:</span>
+        <button type="button" class="quick-btn" data-city="London">London</button>
+        <button type="button" class="quick-btn" data-city="Tokyo">Tokyo</button>
+        <button type="button" class="quick-btn" data-city="New York">New York</button>
+        <button type="button" class="quick-btn" data-city="Chennai">Chennai</button>
+        <button type="button" class="quick-btn" data-city="Dubai">Dubai</button>
+      </div>
+    </form>
+
+    <!-- Error -->
+    <div class="error-banner" id="errorBanner" hidden role="alert" aria-live="assertive">
+      <span aria-hidden="true">⚠️</span>
+      <span id="errorMsg">Something went wrong.</span>
+    </div>
+
+    <!-- Loading -->
+    <div class="loader" id="loader" hidden aria-label="Loading weather data" aria-live="polite">
+      <div class="spinner" aria-hidden="true"></div>
+      <p>Fetching weather data...</p>
+    </div>
+
+    <!-- Main weather display -->
+    <main id="weatherDisplay" hidden>
+
+      <!-- Hero card -->
+      <section class="hero-card" aria-labelledby="cityName">
+        <div class="hero-left">
+          <p class="location-label" id="countryName"></p>
+          <h2 id="cityName"></h2>
+          <p class="date-time" id="dateTime"></p>
+          <div class="temp-row">
+            <span class="temp-main" id="tempMain"></span>
+            <div class="temp-feels">
+              <span id="tempFeels"></span>
+              <span>Feels like</span>
+            </div>
+          </div>
+          <p class="description" id="weatherDesc"></p>
+        </div>
+        <div class="hero-right">
+          <img id="weatherIcon" src="" alt="" class="weather-icon" />
+          <div class="temp-range">
+            <span>↑ <span id="tempMax"></span></span>
+            <span>↓ <span id="tempMin"></span></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stats grid -->
+      <section class="stats-grid" aria-label="Weather statistics">
+        <article class="stat-card" aria-label="Humidity">
+          <div class="stat-icon" aria-hidden="true">💧</div>
+          <div class="stat-body">
+            <span class="stat-val" id="humidity"></span>
+            <span class="stat-lbl">Humidity</span>
+          </div>
+          <div class="stat-bar"><div class="stat-bar-fill" id="humidityBar"></div></div>
+        </article>
+        <article class="stat-card" aria-label="Wind speed">
+          <div class="stat-icon" aria-hidden="true">💨</div>
+          <div class="stat-body">
+            <span class="stat-val" id="windSpeed"></span>
+            <span class="stat-lbl">Wind Speed</span>
+          </div>
+          <div class="stat-extra" id="windDir"></div>
+        </article>
+        <article class="stat-card" aria-label="Pressure">
+          <div class="stat-icon" aria-hidden="true">🌡️</div>
+          <div class="stat-body">
+            <span class="stat-val" id="pressure"></span>
+            <span class="stat-lbl">Pressure</span>
+          </div>
+        </article>
+        <article class="stat-card" aria-label="Visibility">
+          <div class="stat-icon" aria-hidden="true">👁️</div>
+          <div class="stat-body">
+            <span class="stat-val" id="visibility"></span>
+            <span class="stat-lbl">Visibility</span>
+          </div>
+        </article>
+        <article class="stat-card" aria-label="Sunrise">
+          <div class="stat-icon" aria-hidden="true">🌅</div>
+          <div class="stat-body">
+            <span class="stat-val" id="sunrise"></span>
+            <span class="stat-lbl">Sunrise</span>
+          </div>
+        </article>
+        <article class="stat-card" aria-label="Sunset">
+          <div class="stat-icon" aria-hidden="true">🌇</div>
+          <div class="stat-body">
+            <span class="stat-val" id="sunset"></span>
+            <span class="stat-lbl">Sunset</span>
+          </div>
+        </article>
+      </section>
+
+      <!-- 5-day forecast -->
+      <section class="forecast-section" aria-labelledby="forecastTitle">
+        <h3 id="forecastTitle">5-Day Forecast</h3>
+        <div class="forecast-grid" id="forecastGrid" role="list"></div>
+      </section>
+
+    </main>
+
+    <!-- API key notice -->
+    <div class="api-notice" id="apiNotice">
+      <span aria-hidden="true">🔑</span>
+      Add your free OpenWeatherMap API key in <code>app.js</code> (line 3) to enable live data.
+      Get one free at <a href="https://openweathermap.org/api" target="_blank" rel="noopener noreferrer">openweathermap.org</a>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
